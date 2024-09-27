@@ -1,0 +1,8 @@
+# Microservices Challenge
+
+## How to Run
+
+1. Clone the repository.
+2. Run `docker-compose up --build`.
+3. The `users` service will be available at `http://localhost:7001`.
+5. Access RabbitMQ at `http://localhost:15672` (default credentials: admin/admin).
