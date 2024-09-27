@@ -1,0 +1,32 @@
+version: '3.9'
+services:
+    web:
+      build: .
+      volumes: 
+        - ./src:/var/www/html/
+      ports:
+        - 7001:80
+
+    db:
+      image: mysql
+      volumes: 
+        - ./db_data:/var/lib/mysql
+      environment:
+        MYSQL_ROOT_PASSWORD: 123456
+        MYSQL_DATABASE: docker_database_ems_live
+      ports:
+        - 5306:3306
+
+    rabbitmq:
+      image: rabbitmq:3-management
+      ports:
+        - "5672:5672"    # RabbitMQ default port for messaging
+        - "15672:15672"  # RabbitMQ Management plugin port
+      environment:
+        RABBITMQ_DEFAULT_USER: admin   # Set a default user
+        RABBITMQ_DEFAULT_PASS: admin # Set a default password
+      volumes:
+        - rabbitmq_data:/var/lib/rabbitmq # Persist RabbitMQ data
+
+volumes:
+  rabbitmq_data:
